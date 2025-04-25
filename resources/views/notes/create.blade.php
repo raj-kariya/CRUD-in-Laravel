@@ -20,20 +20,21 @@
                     name="title" 
                     class="form-control @error('title') is-invalid @enderror" 
                     id="inputName" 
-                    placeholder="Title">
-                @error('name')
+                    placeholder="Title"
+                    value="{{ old('title') }}">
+                @error('title')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror
             </div>
-
+            
             <div class="mb-3">
-                <label for="inputcontent" class="form-label"><strong>content:</strong></label>
+                <label for="inputcontent" class="form-label"><strong>Content:</strong></label>
                 <textarea 
                     class="form-control @error('content') is-invalid @enderror" 
                     style="height:150px" 
                     name="content" 
                     id="inputcontent" 
-                    placeholder="content"></textarea>
+                    placeholder="content">{{ old('content') }}</textarea>
                 @error('content')
                     <div class="form-text text-danger">{{ $message }}</div>
                 @enderror

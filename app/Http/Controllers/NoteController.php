@@ -9,12 +9,21 @@ use Illuminate\Http\Response;
 use Illuminate\View\View;
 use App\Http\Requests\NoteStoreRequest;
 use App\Http\Requests\NoteUpdateRequest;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+
+// use Illuminate\Http\RedirectResponse;
+// use Illuminate\Http\Request;
+// use Illuminate\Http\Response;
+// use Illuminate\View\View;
+
+
 
 class NoteController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    use ValidatesRequests;
     public function index(): View
     {
         $notes = Note::orderBy('id','asc')->paginate(5);
@@ -34,9 +43,18 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(NoteStoreRequest $request): RedirectResponse
+    public function store(Request $request)
     {   
-        Note::create($request->validated());
+        
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ], [
+            'title.required' => 'This field is required',
+            'content.required' => 'This field is required'
+        ]);
+    
+        Note::create($validatedData);
            
         return redirect()->route('notes.index')
                          ->with('success', 'Note created successfully.');
@@ -61,10 +79,16 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(NoteUpdateRequest $request, Note $note): RedirectResponse
+    public function update(Request $request, Note $note)
     {
-        $note->update($request->validated());
-          
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ], [
+            'title.required' => 'This field is required',
+            'content.required' => 'This field is required'
+        ]);
+        $note->update($validatedData); 
         return redirect()->route('notes.index')
                         ->with('success', 'Note updated successfully');
     }
