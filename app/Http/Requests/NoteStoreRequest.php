@@ -26,4 +26,11 @@ class NoteStoreRequest extends FormRequest
             'content' => 'required|string',
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'This field is required',
+            'content.required' => 'This field is required'
+        ];
+    }
 }

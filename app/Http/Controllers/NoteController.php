@@ -10,7 +10,7 @@ use Illuminate\View\View;
 use App\Http\Requests\NoteStoreRequest;
 use App\Http\Requests\NoteUpdateRequest;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-
+// use Illuminate\Http\Request\NoteStoreRequest;
 // use Illuminate\Http\RedirectResponse;
 // use Illuminate\Http\Request;
 // use Illuminate\Http\Response;
@@ -43,16 +43,10 @@ class NoteController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(NoteStoreRequest $request)
     {   
         
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-        ], [
-            'title.required' => 'This field is required',
-            'content.required' => 'This field is required'
-        ]);
+        $validatedData = $request->validated();
     
         Note::create($validatedData);
            
@@ -79,15 +73,9 @@ class NoteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Note $note)
+    public function update(NoteUpdateRequest $request, Note $note)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-        ], [
-            'title.required' => 'This field is required',
-            'content.required' => 'This field is required'
-        ]);
+        $validatedData = $request->validated();
         $note->update($validatedData); 
         return redirect()->route('notes.index')
                         ->with('success', 'Note updated successfully');
