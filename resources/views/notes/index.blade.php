@@ -17,7 +17,7 @@
         <table class="table table-bordered table-striped mt-4">
             <thead>
                 <tr>
-                    <th width="80px">No</th>
+                    {{-- <th width="80px">No</th> --}}
                     <th>Title</th>
                     <th>content</th>
                     <th width="250px">Action</th>

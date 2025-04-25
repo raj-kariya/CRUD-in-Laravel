@@ -22,7 +22,7 @@ class NoteStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
+            'title' => 'required|unique:notes|string|max:255',
             'content' => 'required|string',
         ];
     }
@@ -30,6 +30,7 @@ class NoteStoreRequest extends FormRequest
     {
         return [
             'title.required' => 'This field is required',
+            'title.unique' => 'This title already exists',
             'content.required' => 'This field is required'
         ];
     }
