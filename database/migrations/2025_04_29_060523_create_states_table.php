@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name')->nullable(false);
             // $table->unsignedBigInteger('country_id');
             $table->boolean('status')->default(1)->comment('1 = visible, 0 = hidden');
             $table->timestamps();
