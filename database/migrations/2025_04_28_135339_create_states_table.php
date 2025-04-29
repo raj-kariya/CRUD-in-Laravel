@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('states', function (Blueprint $table) {
             $table->id();
-            // $table->unsignedBigInteger('brand_id');
-            // $table->string('title');
-            // $table->string('price');
+            $table->string('name');
+            $table->boolean('status')->default(1)->comment('1=active,0=inactive');
+            $table->unsignedBigInteger('country_id');
             $table->timestamps();
+            $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
         });
     }
 
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('states');
     }
 };

@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\NoteController;
 use App\Http\Controllers\EmpController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IdentitycardController;
 Route::get('/', function () {
@@ -34,3 +35,6 @@ Route::get('/notes', [NoteController::class, 'index'])->name('notes.index');
 Route::resource('notes', NoteController::class);
 
 Route::get('/identity',[IdentitycardController::class,'index']);
+
+Route::get('/brand',[BrandController::class,'index']);
+Route::get('/product',[ProductController::class,'index']);
