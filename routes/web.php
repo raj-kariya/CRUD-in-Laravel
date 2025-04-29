@@ -4,7 +4,7 @@ use App\Http\Controllers\NoteController;
 use App\Http\Controllers\EmpController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\IdentitycardController;
 Route::get('/', function () {
     return view('welcome');
 });
@@ -32,3 +32,5 @@ Route::get('/employee',[EmpController::class, 'show'])->name('employee.show');
 // Route::resource('notes', NoteController::class);
 Route::get('/notes', [NoteController::class, 'index'])->name('notes.index');
 Route::resource('notes', NoteController::class);
+
+Route::get('/identity',[IdentitycardController::class,'index']);

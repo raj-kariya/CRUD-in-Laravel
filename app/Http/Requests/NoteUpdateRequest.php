@@ -21,6 +21,7 @@ class NoteUpdateRequest extends FormRequest
                 'required',
                 Rule::unique('notes')->ignore($this->route('note')),
                 'string',
+                'min:3',
                 'max:255',
             ],
             'content' => 'required|string',
